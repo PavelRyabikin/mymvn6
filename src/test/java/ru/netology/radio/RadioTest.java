@@ -112,4 +112,22 @@ public class RadioTest {
 
         assertEquals(0, radio.getCurrentVolume());
     }
+
+    @Test
+    void shouldNotSetVolumeBelowMin() {
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(-1);
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    void shouldNotSetVolumeAboveMax() {
+        Radio radio = new Radio();
+
+        radio.setCurrentVolume(101);
+
+        assertEquals(0, radio.getCurrentVolume());
+    }
 }
