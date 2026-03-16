@@ -1,67 +1,60 @@
 package ru.netology.radio;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+
 public class Radio {
 
     private int currentStation;
     private int currentVolume;
+    private int stationsCount = 10;
 
-    public int getCurrentStation() {
-        return currentStation;
+    public Radio(int stationsCount) {
+        this.stationsCount = stationsCount;
     }
 
     public void setCurrentStation(int newStation) {
-        if (newStation < 0) {
-            return;
+        if (newStation >= 0 && newStation < stationsCount) {
+            this.currentStation = newStation;
         }
+    }
 
-        if (newStation > 9) {
-            return;
+    public void setCurrentVolume(int newVolume) {
+        if (newVolume >= 0 && newVolume <= 100) {
+            this.currentVolume = newVolume;
         }
-
-        currentStation = newStation;
     }
 
     public void next() {
-        if (currentStation == 9) {
+        if (currentStation == stationsCount - 1) {
             currentStation = 0;
         } else {
-            currentStation = currentStation + 1;
+            currentStation++;
         }
     }
 
     public void prev() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = stationsCount - 1;
         } else {
-            currentStation = currentStation - 1;
+            currentStation--;
         }
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int newVolume) {
-        if (newVolume < 0) {
-            return;
-        }
-
-        if (newVolume > 100) {
-            return;
-        }
-
-        currentVolume = newVolume;
     }
 
     public void increaseVolume() {
         if (currentVolume < 100) {
-            currentVolume = currentVolume + 1;
+            currentVolume++;
         }
     }
 
     public void decreaseVolume() {
         if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
+            currentVolume--;
         }
     }
 }
